@@ -6,7 +6,7 @@ use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-return Application::configure(basePath: dirname(__DIR__))
+$app = Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
         api: __DIR__.'/../routes/api.php',
@@ -40,3 +40,10 @@ return Application::configure(basePath: dirname(__DIR__))
         });
     })
     ->create();
+
+// Dukung custom storage path untuk Vercel Serverless (/tmp/storage)
+if ($customStorage = (getenv('APP_STORAGE') ?: ($_ENV['APP_STORAGE'] ?? null))) {
+    $app->useStoragePath($customStorage);
+}
+
+return $app;
