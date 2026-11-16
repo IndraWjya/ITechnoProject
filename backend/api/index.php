@@ -21,8 +21,10 @@ $_ENV['APP_STORAGE'] = $storageDir;
 putenv('VIEW_COMPILED_PATH=' . $storageDir . '/framework/views');
 $_ENV['VIEW_COMPILED_PATH'] = $storageDir . '/framework/views';
 
-// Pastikan SCRIPT_NAME dianggap /index.php di root agar Laravel tidak memotong prefix /api dari REQUEST_URI
+// Normalisasi variabel server agar Laravel di Vercel menangani route secara konsisten
 $_SERVER['SCRIPT_NAME'] = '/index.php';
+$_SERVER['SCRIPT_FILENAME'] = __DIR__ . '/../public/index.php';
+$_SERVER['PHP_SELF'] = '/index.php';
 
 // Teruskan request ke entrypoint Laravel public/index.php
 require __DIR__ . '/../public/index.php';
