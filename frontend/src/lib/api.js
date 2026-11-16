@@ -4,7 +4,7 @@ function getToken() {
   return localStorage.getItem('nexora_token');
 }
 
-const AUTH_ENDPOINTS = ['/auth/login', '/auth/register'];
+const AUTH_ENDPOINTS = ['/auth/login', '/auth/register', '/auth/reset-password', '/auth/google'];
 async function request(path, { method = 'GET', body, headers = {} } = {}) {
   const token = getToken();
 

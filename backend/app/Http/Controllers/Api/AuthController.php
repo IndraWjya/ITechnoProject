@@ -114,6 +114,33 @@ class AuthController extends Controller
     }
 
     /**
+     * POST /api/auth/reset-password
+     * Atur ulang password pengguna berdasarkan email terdaftar.
+     */
+    public function resetPassword(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string', 'min:6'],
+        ]);
+
+        $user = User::where('email', $validated['email'])->first();
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'Akun dengan email ini tidak ditemukan.',
+            ], 404);
+        }
+
+        $user->password_hash = Hash::make($validated['password']);
+        $user->save();
+
+        return response()->json([
+            'message' => 'Password berhasil diperbarui. Silakan login kembali dengan password baru Anda.',
+        ]);
+    }
+
+    /**
      * GET /api/auth/me
      */
     public function me(Request $request): JsonResponse

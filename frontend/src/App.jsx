@@ -7,6 +7,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 // Import Halaman Auth
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
+import ForgotPassword from './pages/auth/ForgotPassword';
 
 // Import Halaman Dashboard
 import Dashboard from './pages/dashboard/Dashboard';
@@ -30,6 +31,7 @@ function App() {
           {/* Rute Auth */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
 
           {/* Rute Dashboard — semuanya wajib login */}
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
