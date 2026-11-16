@@ -21,5 +21,8 @@ $_ENV['APP_STORAGE'] = $storageDir;
 putenv('VIEW_COMPILED_PATH=' . $storageDir . '/framework/views');
 $_ENV['VIEW_COMPILED_PATH'] = $storageDir . '/framework/views';
 
+// Pastikan SCRIPT_NAME dianggap /index.php di root agar Laravel tidak memotong prefix /api dari REQUEST_URI
+$_SERVER['SCRIPT_NAME'] = '/index.php';
+
 // Teruskan request ke entrypoint Laravel public/index.php
 require __DIR__ . '/../public/index.php';
