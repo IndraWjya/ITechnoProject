@@ -3,7 +3,11 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return response()->json([
+        'status' => 'online',
+        'app' => 'Nexora API Backend',
+        'version' => '1.0.0',
+    ]);
 });
 
 Route::get('/migrate', function () {
