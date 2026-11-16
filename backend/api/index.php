@@ -1,6 +1,10 @@
 <?php
 
-// Pastikan struktur direktori storage sementara di /tmp tersedia (Vercel Serverless)
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
+// Pastikan direktori storage di /tmp ada (Vercel Serverless)
 $storageDir = '/tmp/storage';
 $subDirs = [
     '/framework/views',
@@ -21,10 +25,10 @@ $_ENV['APP_STORAGE'] = $storageDir;
 putenv('VIEW_COMPILED_PATH=' . $storageDir . '/framework/views');
 $_ENV['VIEW_COMPILED_PATH'] = $storageDir . '/framework/views';
 
-// Normalisasi variabel server agar Laravel di Vercel menangani route secara konsisten
+// Normalisasi variabel server
 $_SERVER['SCRIPT_NAME'] = '/index.php';
 $_SERVER['SCRIPT_FILENAME'] = __DIR__ . '/../public/index.php';
 $_SERVER['PHP_SELF'] = '/index.php';
 
-// Teruskan request ke entrypoint Laravel public/index.php
+// Teruskan ke Laravel
 require __DIR__ . '/../public/index.php';
